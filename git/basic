@@ -1,0 +1,10 @@
+#!/bin/bash
+read -r -p "Your commit message: " message
+if [ -z "$message" ]
+then 
+  echo "A message has to be provided!"
+else 
+  git add .
+  git commit -m "$message"
+  git push
+fi
