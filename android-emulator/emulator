@@ -1,0 +1,7 @@
+#!/bin/bash
+cd ~/Library/Android/Sdk/tools/bin 
+./avdmanager list avd 
+echo "---- Please choose a device from the list above and copy its 'name'."
+cd ~/Library/Android/Sdk/tools 
+read -r -p "Your device: " device
+./emulator -avd $device
