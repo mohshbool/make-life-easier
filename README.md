@@ -16,8 +16,8 @@ $ mkdir bin
 $ cd ~
 $ open .bash_profile
 ```
-##### Add this to your `.bash_profile` export the directory to `$PATH `
-`export PATH=$PATH:/Users/tania/bin`
+##### Add this to your `.bash_profile` export the directory to `$PATH ` -- User is your username
+`export PATH=$PATH:/Users/<user>/bin`
 - #### Clone the contents of the repo into the bin folder.
 ##### NOTE: If you don't have git, just the download the zip file and extract its contents into `~/bin`
 ```
