@@ -1,10 +1,9 @@
 # Make Your Life Easier
 This repository contains shell script files for Unix-based system that automate mundane processes.
 
-# Geting started
+## Geting started
 
-## TL;DR
-#### Copy this into your terminal and run it
+### TL;DR: Copy this into your terminal and run it
 ```
 cd && mkdir bin && cd bin && git clone https://github.com/Minter27/make-life-easier.git . && chmod -R u+x .
 ```
