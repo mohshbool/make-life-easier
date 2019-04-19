@@ -1,5 +1,41 @@
 #!/bin/bash
 
+
+# Helper funcions
+getDevices() {
+  while IFS=' ' read -ra args; do
+    devices=( )
+    for index in "${!args[@]}"; do
+      if [[ "Name:" == "${args[index]}" ]]; then
+        devices+=("${args[index+1]}")
+      fi
+    done
+    echo ${devices[@]}
+  done <<< $(sh -c "$listAvd")
+}
+
+isDeviceValid() {
+  devices=$(getDevices)
+  while IFS=' ' read -ra devices; do
+    for device in "${devices[@]}"; do
+      echo $device
+      if [[ $1 == $device ]]; then
+        return 0
+      fi
+    done
+  done <<< $(getDevices)
+  return 1
+}
+
+pp_Devices() {
+  while IFS=' ' read -ra devices; do
+    for device in "${devices[@]}"; do
+      echo "-  $device"
+    done
+  done <<< $(getDevices)
+}
+
+# OS check
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   binPath=~/Android/Sdk/tools/bin
   # Android Studio Version Check
@@ -17,22 +53,12 @@ else
   exit 1
 fi
 
-pythonPath=~/bin/helpers/getDevices.py
+# Constant
 listAvd="$binPath/avdmanager list avd"
 
-isDeviceValid() {
-  while IFS=',' read -ra devices; do
-    for device in "${devices[@]}"; do
-      if [[ $1 == $device ]]; then
-        return 0
-      fi
-    done
-  done <<< $(python3 ~/bin/helpers/getDevices.py get-devices $(sh -c "$listAvd"))
-  return 1
-}
-
+# Arguments guidance
 if [[ $1 == "show" ]]; then
-  python3 $pythonPath show-devices $($listAvd)
+  pp_Devices
 elif [[ $1 == "run" ]]; then
   if isDeviceValid "$2"; then
     $emuPath/emulator -avd $2
@@ -40,7 +66,7 @@ elif [[ $1 == "run" ]]; then
     echo "The device name is invalid. To see the devices you have installed, run android-emulator show"
   fi
 else
-  python3 $pythonPath get-devices $($listAvd)
+  pp_Devices
   read -r -p "Your device: " device
   $emuPath/emulator -avd $device
 fi
