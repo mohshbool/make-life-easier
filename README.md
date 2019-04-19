@@ -34,3 +34,6 @@ $ git clone https://github.com/Minter27/make-life-easier.git .
 $ cd ~/bin
 $ chmod -R u+x .
 ```
+
+## TODO
+- [ ] Get rid of helpers and migrate functionality into shell script
