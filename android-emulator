@@ -1,7 +1,46 @@
 #!/bin/bash
-cd ~/Library/Android/Sdk/tools/bin 
-./avdmanager list avd 
-echo "---- Please choose a device from the list above and copy its 'name'."
-cd ~/Library/Android/Sdk/tools 
-read -r -p "Your device: " device
-./emulator -avd $device
+
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  binPath=~/Android/Sdk/tools/bin
+  # Android Studio Version Check
+  if [[ ! -d "~/Android/Sdk/tools" ]]; then
+    # @^3.2
+    emuPath=~/Android/Sdk/emulator
+  else
+    emuPath=~/Android/Sdk/tools
+  fi
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  binPath=~/Library/Android/Sdk/tools/bin
+  emuPath=~/Library/Android/Sdk/tools
+else 
+  echo "Script is unable to run, incompative operating system. Quitting ...."
+  exit 1
+fi
+
+pythonPath=~/bin/helpers/getDevices.py
+listAvd="$binPath/avdmanager list avd"
+
+isDeviceValid() {
+  while IFS=',' read -ra devices; do
+    for device in "${devices[@]}"; do
+      if [[ $1 == $device ]]; then
+        return 0
+      fi
+    done
+  done <<< $(python3 ~/bin/helpers/getDevices.py get-devices $(sh -c "$listAvd"))
+  return 1
+}
+
+if [[ $1 == "show" ]]; then
+  python3 $pythonPath show-devices $($listAvd)
+elif [[ $1 == "run" ]]; then
+  if isDeviceValid "$2"; then
+    $emuPath/emulator -avd $2
+  else
+    echo "The device name is invalid. To see the devices you have installed, run android-emulator show"
+  fi
+else
+  python3 $pythonPath get-devices $($listAvd)
+  read -r -p "Your device: " device
+  $emuPath/emulator -avd $device
+fi
