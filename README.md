@@ -36,4 +36,4 @@ $ chmod -R u+x .
 ```
 
 ## TODO
-- [ ] Get rid of helpers and migrate functionality into shell script
+- [x] Get rid of helpers and migrate functionality into shell script
