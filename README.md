@@ -5,7 +5,7 @@ This repository contains shell script files for Unix-based system that automate 
 
 ### TL;DR: Copy this into your terminal and run it
 ```
-cd && mkdir bin && cd bin && git clone https://github.com/Minter27/make-life-easier.git . && chmod -R u+x .
+mkdir ~/bin && echo "export PATH=$PATH:/Users/$USER/bin" >> ~/.bash_profile && source ~/.bash_profile && cd bin && git clone https://github.com/Minter27/make-life-easier.git . && chmod -R u+x .
 ```
 
 ### NOTE: This will guide you through the steps of making a universal script file that can be run from anywhere in Terminal.
@@ -21,8 +21,8 @@ $ mkdir bin
 $ cd ~
 $ open .bash_profile
 ```
-##### Add this to your `.bash_profile` export the directory to `$PATH ` -- User is your username (whoami)
-`export PATH=$PATH:/Users/<user>/bin`
+##### Add this to your `.bash_profile` export the directory to `$PATH`.
+`export PATH=$PATH:/Users/$USER/bin`
 - #### Clone the contents of the repo into the bin folder.
 ##### NOTE: If you don't have git, just the download the zip file and extract its contents into `~/bin`
 ```
