@@ -35,5 +35,20 @@ $ cd ~/bin
 $ chmod -R u+x .
 ```
 
+## Scipt-specific Information
+
+### commit
+- #### Requires `git` to be installed.
+
+### android-emulator
+#### Usage:
+- `$ android-emulator` to show available devices and then prompt you to enter the desired device to launch.
+- `$ android-emulator show` to show available devices.
+- `$ android-emulator run <device_name>` to run a specific device.
+
+### mongoexportdb
+- #### Requires `mongo-cli` to be installed.
+
+
 ## TODO
 - [x] ~~Get rid of helpers and migrate functionality into shell script~~
