@@ -66,6 +66,11 @@ elif [[ $1 == "run" ]]; then
     echo "The device name is invalid. To see the devices you have installed, run android-emulator show"
   fi
 else
+  echo "------------------------------------------------------------------------------------"
+  echo "For future usues, you can use `android-emulator show` to show the available devices,"
+  echo "you can also use `andorid-emulator run <device_name>` to launch the device."
+  echo "------------------------------------------------------------------------------------"
+  echo "This will show you your available devices and prompt you to choose one (by copying it)."
   pp_Devices
   read -r -p "Your device: " device
   $emuPath/emulator -avd $device
