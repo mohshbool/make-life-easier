@@ -61,7 +61,7 @@ if [[ $1 == "show" ]]; then
   pp_Devices
 elif [[ $1 == "run" ]]; then
   if isDeviceValid "$2"; then
-    $emuPath/emulator -avd $2
+    (cd $emuPath && emulator -avd $2)
   else
     echo "The device name is invalid. To see the devices you have installed, run android-emulator show"
   fi
@@ -73,5 +73,5 @@ else
   echo "This will show you your available devices and prompt you to choose one (by copying it)."
   pp_Devices
   read -r -p "Your device: " device
-  $emuPath/emulator -avd $device
+  (cd $emuPath && emulator -avd $device)
 fi
