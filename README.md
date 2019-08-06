@@ -1,6 +1,10 @@
 # Make Your Life Easier
 This repository contains shell script files for Unix-based system that automate mundane processes.
 
+## Demos
+### android-emulator
+![android-emulator-gif](https://media.giphy.com/media/XF4Zl84i5bKAfx1Zor/giphy.gif)
+
 ## Geting started
 
 ### TL;DR: Copy this into your terminal and run it
