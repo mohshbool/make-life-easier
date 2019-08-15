@@ -56,4 +56,4 @@ $ chmod -R u+x .
 
 ## TODO
 - [x] ~~Get rid of helpers and migrate functionality into shell script~~
-- [] Make device selection by number for ease of use on android-emulator
+- [ ] Make device selection by number for ease of use on android-emulator
