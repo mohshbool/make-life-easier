@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Helper funcions
 getDevices() {
   while IFS=' ' read -ra args; do
@@ -29,8 +28,20 @@ isDeviceValid() {
 
 pp_Devices() {
   while IFS=' ' read -ra devices; do
-    for device in "${devices[@]}"; do
-      echo "-  $device"
+    for i in "${!devices[@]}"; do
+      echo "[$i] -  ${devices[$i]}"
+      let devicesLen=$i+1
+    done
+  done <<< $(getDevices)
+}
+
+getDevice() {
+  while IFS=' ' read -ra devices; do
+    for i in "${!devices[@]}"; do
+      if [[ $1 == $i ]]; then
+        device="${devices[$i]}"
+        return 0
+      fi
     done
   done <<< $(getDevices)
 }
@@ -49,7 +60,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   binPath=~/Library/Android/Sdk/tools/bin
   emuPath=~/Library/Android/Sdk/tools
 else 
-  echo "Script is unable to run, incompative operating system. Quitting ...."
+  echo "Script is unable to run, incompatible operating system. Quitting ...."
   exit 1
 fi
 
@@ -67,11 +78,16 @@ elif [[ $1 == "run" ]]; then
   fi
 else
   echo "------------------------------------------------------------------------------------"
-  echo "For future usues, you can use `android-emulator show` to show the available devices,"
-  echo "you can also use `andorid-emulator run <device_name>` to launch the device."
+  echo "For future usues, you can use \`android-emulator show\` to show the available devices,"
+  echo "you can also use \`andorid-emulator run <device_name>\` to launch the device."
   echo "------------------------------------------------------------------------------------"
   echo "This will show you your available devices and prompt you to choose one (by copying it)."
   pp_Devices
-  read -r -p "Your device: " device
-  (cd $emuPath && emulator -avd $device)
+  read -r -p "Your device number: " number
+  if [[ $number -lt $devicesLen ]] && [[ $number -gt -1 ]]; then
+    getDevice $number
+    (cd $emuPath && emulator -avd $device)
+  else
+    echo "The number you entered is out of index. Please, try again!"
+  fi
 fi
