@@ -1,5 +1,18 @@
 #!/bin/bash
 
+echo "    
+                  ------- Android Emulator Shell Srcript -------
+
+    A shell script for Unix-based systems (Linux, macOS, etc...) that basically 
+    allows you to run your Android Emulator (has to be already installed) without 
+    the need to open Android Studio everytime you want to launch your emulator.
+
+      |----------------------------------------------------------------------|
+      |  Author: Mohammad Shbool <@mohshbool> (https://github.com/mohshbool) |
+      |----------------------------------------------------------------------|
+
+"
+
 # Helper funcions
 getDevices() {
   while IFS=' ' read -ra args; do
