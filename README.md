@@ -2,7 +2,8 @@
 This repository contains shell script files for Unix-based system that automate mundane processes.
 
 ## Demos
-### android-emulator (outdated)
+### android-emulator (depracated)
+### [interfece by google](https://developer.android.com/studio/run/emulator-commandline)
 ![android-emulator-gif](https://media.giphy.com/media/XF4Zl84i5bKAfx1Zor/giphy.gif)
 
 ## Geting started
